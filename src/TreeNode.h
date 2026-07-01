@@ -4,33 +4,43 @@
 #include "Recipe.h"
 #include <string>
 #include <vector>
-
-// TreeNode to use in Splay tree and Red Black tree
+#include <iostream>
 
 using namespace std;
 
-struct TreeNode {
+struct SplayTreeNode {
     string key; // stores ingredient name
     vector<Recipe*> recipes;
 
-    TreeNode* left;
-    TreeNode* right;
+    SplayTreeNode* parent;
+
+    SplayTreeNode* left;
+    SplayTreeNode* right;
 
     // constructors
-    TreeNode() : left(nullptr), right(nullptr) {}
-    TreeNode(string ingredient) : key(ingredient), left(nullptr), right(nullptr) {}
-
-
+    SplayTreeNode() : left(nullptr), right(nullptr), parent(nullptr) {}
+    SplayTreeNode(string ingredient, SplayTreeNode* p) : key(ingredient), left(nullptr), right(nullptr), parent(p) {}
+    SplayTreeNode(string ingredient, SplayTreeNode* p, SplayTreeNode* l, SplayTreeNode* r) : key(ingredient), left(l), right(r), parent(p) {}
+    SplayTreeNode(string ingredient, vector<Recipe*> rec) : key(ingredient), left(nullptr), right(nullptr), recipes(rec) {}
     // functions
     void addRecipe(Recipe* recipe) {
         recipes.push_back(recipe);
     }
 
-    // destructor
-    ~TreeNode() {
-        // implement postorder traversal to delete the children recursively
+    void updateParent(SplayTreeNode* newParent) {
+        parent = newParent;
+    }
+
+    void printNode() {
+        cout << "Parent: ";
+        if (parent != nullptr) {
+            cout << parent->key;
+        }
+        else {
+            cout << "null";
+        }
+        cout << "; Key: " << key << " has " << recipes.size() << " recipes" << endl;
     }
 };
-
 
 #endif
