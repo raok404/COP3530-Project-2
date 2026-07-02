@@ -13,7 +13,7 @@ class SplayTree {
     SplayTreeNode* rotateLeft(SplayTreeNode* node) {
         // need to rotate AND update applicable parent nodes
         // call on the parent of the node you want to move up
-
+        SplayTreeNode* parentOfNode = node->parent;
         SplayTreeNode* newRoot = node->right;
         SplayTreeNode* temp = node;
         temp->updateParent(newRoot);
@@ -25,45 +25,109 @@ class SplayTree {
 
         newRoot->left = temp;
 
-        newRoot->updateParent(nullptr);
+        newRoot->updateParent(parentOfNode);
+        if (parentOfNode != nullptr) {
+            parentOfNode->updateChild(newRoot);
+        }
 
-        root = newRoot;
-        return root;
-        // for zig and zag, they end up being the root of the whole tree (since no grandparent)
+        return newRoot;
+        // for zig and zag, the calling function will need to make it root of the whole tree (since no grandparent)
     }
 
-    SplayTreeNode* rotateRight(SplayTreeNode* root) {
+    SplayTreeNode* rotateRight(SplayTreeNode* node) {
+        SplayTreeNode* parentOfNode = node->parent;
+        SplayTreeNode* newRoot = node->left;
+        SplayTreeNode* temp = node;
+        temp->updateParent(newRoot);
 
+        temp->left = newRoot->right;
+        if (temp->left != nullptr) {
+            temp->left->updateParent(temp);
+        }
+
+        newRoot->right = temp;
+
+        newRoot->updateParent(parentOfNode);
+        if (parentOfNode != nullptr) {
+            parentOfNode->updateChild(newRoot);
+        }
+        return newRoot;
     }
 
-    SplayTreeNode* rotateLeftLeft(SplayTreeNode* root) {}
+    SplayTreeNode* rotateLeftLeft(SplayTreeNode* node) {
+        node->right = rotateLeft(node->right);
+        return rotateLeft(node);
+    }
 
-    SplayTreeNode* rotateRightRight(SplayTreeNode* root) {}
+    SplayTreeNode* rotateRightRight(SplayTreeNode* node) {
+        node->left = rotateRight(node->left);
+        return rotateRight(node);
+    }
 
-    SplayTreeNode* rotateLeftRight(SplayTreeNode* root) {}
+    SplayTreeNode* rotateLeftRight(SplayTreeNode* node) {
+        node->left = rotateLeft(node->left);
+        return rotateRight(node);
+    }
 
-    SplayTreeNode* rotateRightLeft(SplayTreeNode* root) {}
+    SplayTreeNode* rotateRightLeft(SplayTreeNode* node) {
+        node->right = rotateRight(node->right);
+        return rotateLeft(node);
+    }
+
+    SplayTreeNode* splay(SplayTreeNode* node) {
+        // call on node to move up
+        if (node->parent == nullptr) { // base case
+            root = node;
+            return node;
+        }
+        if (node->parent->parent == nullptr) {
+            if (node == node->parent->right) {
+                root = rotateLeft(node->parent);
+                return root;
+            }
+            else if (node == node->parent->left) {
+                root = rotateRight(node->parent);
+                return root;
+            }
+        }
+        else {
+            // need to splay until it goes up to root recursively
+            if (node->parent->parent->right != nullptr && node == node->parent->parent->right->right) {
+                return splay(rotateLeftLeft(node->parent->parent));
+            }
+            else if (node->parent->parent->right != nullptr && node == node->parent->parent->right->left) {
+                return splay(rotateRightLeft(node->parent->parent));
+            }
+            else if (node->parent->parent->left != nullptr && node == node->parent->parent->left->left) {
+                return splay(rotateRightRight(node->parent->parent));
+            }
+            else {
+                return splay(rotateLeftRight(node->parent->parent));
+            }
+        }
+    }
 
     // helper methods for other stuff: insert, remove, search
     SplayTreeNode* insertHelper(SplayTreeNode* root, string ingredient, vector<Recipe*> recipes) {
-        if (root == nullptr) {
-            return new SplayTreeNode(ingredient, recipes);
-        }
+        // this will return the inserted node
         if (ingredient < root->key) {
-            root->left = insertHelper(root->left, ingredient, recipes);
-            root->left->updateParent(root);
+            if (root->left == nullptr) {
+                root->left = new SplayTreeNode(ingredient, root,recipes);
+                return root->left;
+            }
+            return insertHelper(root->left, ingredient, recipes);
+        }
+        else if (ingredient > root->key) {
+            if (root->right == nullptr) {
+                root->right = new SplayTreeNode(ingredient, root, recipes);
+                return root->right;
+            }
+            return insertHelper(root->right, ingredient, recipes);
         }
         else {
-            root->right = insertHelper(root->right, ingredient, recipes);
-            root->right->updateParent(root);
+            // for duplicate key, just return it
+            return root;
         }
-
-        root->updateParent(nullptr);
-        return root;
-        // this doesn't cover case where insert duplicate key, what to do then?
-        // it just gets added again to right side currently...
-
-        // need to add splaying after insert, as well...
     }
 
     void destructorHelper(SplayTreeNode* root) {
@@ -99,23 +163,9 @@ public:
 
     // functions
     // will implement insert, delete, find, etc...
-    // need splay()
-    // which needs rotateLeft, rotateRight, rotateLeftRight, etc...
-    SplayTreeNode* splay(SplayTreeNode* node) {
-        // call on node to move up
-        if (node->parent == nullptr) {
-            return node;
-        }
-        if (node->parent->parent == nullptr) {
-            if (node == node->parent->right) {
-                return rotateLeft(node->parent);
-            }
-        }
-    }
 
     SplayTreeNode* insert(string ingredient, vector<Recipe*> recipes) {
-        root = insertHelper(root, ingredient, recipes);
-        return root;
+        return splay(insertHelper(root, ingredient, recipes));
     }
 
     void printTree() {
