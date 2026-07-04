@@ -130,6 +130,21 @@ class SplayTree {
         }
     }
 
+    SplayTreeNode* searchHelper(SplayTreeNode* node, SplayTreeNode* prevNode, string ingredient) {
+        if (node == nullptr) {
+            return prevNode;
+        }
+        if (ingredient == node->key) {
+            return node;
+        }
+        else if (ingredient < node->key) {
+            return searchHelper(node->left, node, ingredient);
+        }
+        else {
+            return searchHelper(node->right, node, ingredient);
+        }
+    }
+
     void destructorHelper(SplayTreeNode* root) {
         if (root == nullptr) {
             return;
@@ -166,6 +181,10 @@ public:
 
     SplayTreeNode* insert(string ingredient, vector<Recipe*> recipes) {
         return splay(insertHelper(root, ingredient, recipes));
+    }
+
+    SplayTreeNode* search(string ingredient) {
+        return splay(searchHelper(root, nullptr, ingredient));
     }
 
     void printTree() {
