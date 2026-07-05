@@ -44,6 +44,15 @@ struct SplayTreeNode {
         }
     }
 
+    void unconnectChild(SplayTreeNode* childToUnconnect) {
+        if (left == childToUnconnect) {
+            left = nullptr;
+        }
+        else if (right == childToUnconnect) {
+            right = nullptr;
+        }
+    }
+
     void printNode() {
         cout << "Key: " << key << " has " << recipes.size() << " recipes; ";
         cout << "Parent: ";

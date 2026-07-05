@@ -55,12 +55,12 @@ class SplayTree {
     }
 
     SplayTreeNode* rotateLeftLeft(SplayTreeNode* node) {
-        node->right = rotateLeft(node->right);
+        node = rotateLeft(node);
         return rotateLeft(node);
     }
 
     SplayTreeNode* rotateRightRight(SplayTreeNode* node) {
-        node->left = rotateRight(node->left);
+        node = rotateRight(node);
         return rotateRight(node);
     }
 
@@ -110,6 +110,10 @@ class SplayTree {
     // helper methods for other stuff: insert, remove, search
     SplayTreeNode* insertHelper(SplayTreeNode* root, string ingredient, vector<Recipe*> recipes) {
         // this will return the inserted node
+        if (root == nullptr) {
+            root = new SplayTreeNode(ingredient, nullptr, recipes);
+            return root;
+        }
         if (ingredient < root->key) {
             if (root->left == nullptr) {
                 root->left = new SplayTreeNode(ingredient, root,recipes);
@@ -143,6 +147,70 @@ class SplayTree {
         else {
             return searchHelper(node->right, node, ingredient);
         }
+    }
+
+    SplayTreeNode* removeHelper(SplayTreeNode* node, SplayTreeNode* prevNode, string ingredient) {
+        if (node == nullptr) {
+            return prevNode;
+        }
+        if (ingredient == node->key) {
+            return removeNode(node);
+        }
+        else if (ingredient < node->key) {
+            return removeHelper(node->left, node, ingredient);
+        }
+        else {
+            return removeHelper(node->right, node, ingredient);
+        }
+    }
+
+    SplayTreeNode* removeNode(SplayTreeNode* node) {
+        // returns the node to splay up;
+
+        // deleting node with 0 children: just delete the node, update parent's left/right to not point to it
+        if (node->left == nullptr && node->right == nullptr) {
+            SplayTreeNode* p = node->parent;
+            p->unconnectChild(node);
+            delete node;
+            return p;
+        }
+        else if (node->left != nullptr && node->right != nullptr) {
+            // deleting node with 2 children: find inorder successor and copy its data to the current node...
+            // then delete the inorder successor BUT need to return inorder successor's parent
+            SplayTreeNode* inorderSuccessor = findInorderSuccessor(node);
+            node->key = inorderSuccessor->key;
+            node->recipes = inorderSuccessor->recipes;
+
+            return removeHelper(inorderSuccessor, inorderSuccessor->parent, inorderSuccessor->key);
+        }
+        else {
+            // deleting node with 1 child: delete the node and connect the deleted's parent to the deleted's child (update child's parent too)
+            SplayTreeNode* p = node->parent;
+            if (node->left != nullptr) {
+                SplayTreeNode* c = node->left;
+                p->updateChild(c);
+                c->updateParent(p);
+                delete node;
+                return p;
+            }
+            else {
+                SplayTreeNode* c = node->right;
+                p->updateChild(c);
+                c->updateParent(p);
+                delete node;
+                return p;
+            }
+        }
+    }
+
+    SplayTreeNode* findInorderSuccessor(SplayTreeNode* node) {
+        // only call on nodes with a right child
+        SplayTreeNode* inorderSuccessor = node->right;
+        while (inorderSuccessor->left != nullptr) {
+            inorderSuccessor = inorderSuccessor->left;
+        }
+
+        return inorderSuccessor;
     }
 
     void destructorHelper(SplayTreeNode* root) {
@@ -185,6 +253,10 @@ public:
 
     SplayTreeNode* search(string ingredient) {
         return splay(searchHelper(root, nullptr, ingredient));
+    }
+
+    SplayTreeNode* remove(string ingredient) {
+        return splay(removeHelper(root, nullptr, ingredient));
     }
 
     void printTree() {
