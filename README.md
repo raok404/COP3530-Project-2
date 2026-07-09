@@ -1,3 +1,21 @@
+# Ratatouille - COP3530 Project 2
+
+## How to run the code
+### git lfs
+Due to the large size of the dataset, you will need git lfs to pull it from the GitHub.
+```commandline
+git lfs install
+git lfs track "*.json"
+git add .gitattributes
+
+git lfs pull
+```
+### configuring CMakeLists.txt
+Use the CMakeLists.txt in the repo to make sure the dependencies (nlohmann/json) are installed
+
+### running the program
+
+
 <H1> COP3530 - Project 2 </h1>
 This is the template for Project 2 repositories. It includes all the assignment instructions and documentation to help you use GitHub.
 
