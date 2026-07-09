@@ -2,6 +2,7 @@
 #define COP3530_PROJECT_2_SPLAYTREE_H
 
 #include <string>
+#include <unordered_set>
 #include "Recipe.h"
 #include "TreeNode.h"
 
@@ -236,6 +237,15 @@ class SplayTree {
         }
     }
 
+    void inorderTraversalHelper(SplayTreeNode* node, unordered_set<string>& ingredientList) {
+        if (node == nullptr) {
+            return;
+        }
+        inorderTraversalHelper(node->left, ingredientList);
+        ingredientList.insert(node->key);
+        inorderTraversalHelper(node->right, ingredientList);
+    }
+
 public:
     SplayTree() : root(nullptr) {}
     SplayTree(SplayTreeNode* r) : root(r) {}
@@ -257,6 +267,12 @@ public:
 
     SplayTreeNode* remove(string ingredient) {
         return splay(removeHelper(root, nullptr, ingredient));
+    }
+
+    unordered_set<string> getIngredients() {
+        unordered_set<string> ingredients;
+        inorderTraversalHelper(root, ingredients);
+        return ingredients;
     }
 
     void printTree() {
