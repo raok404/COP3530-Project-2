@@ -10,7 +10,7 @@ using namespace std;
 
 struct SplayTreeNode {
     string key; // stores ingredient name
-    vector<Recipe*> recipes;
+    vector<Recipe> recipes;
 
     SplayTreeNode* parent;
 
@@ -21,10 +21,10 @@ struct SplayTreeNode {
     SplayTreeNode() : left(nullptr), right(nullptr), parent(nullptr) {}
     SplayTreeNode(string ingredient, SplayTreeNode* p) : key(ingredient), left(nullptr), right(nullptr), parent(p) {}
     SplayTreeNode(string ingredient, SplayTreeNode* p, SplayTreeNode* l, SplayTreeNode* r) : key(ingredient), left(l), right(r), parent(p) {}
-    SplayTreeNode(string ingredient, vector<Recipe*> rec) : key(ingredient), left(nullptr), right(nullptr), recipes(rec) {}
-    SplayTreeNode(string ingredient, SplayTreeNode* p, vector<Recipe*> rec) : key(ingredient), parent(p), recipes(rec), left(nullptr), right(nullptr) {}
+    SplayTreeNode(string ingredient, vector<Recipe> rec) : key(ingredient), left(nullptr), right(nullptr), recipes(rec) {}
+    SplayTreeNode(string ingredient, SplayTreeNode* p, vector<Recipe> rec) : key(ingredient), parent(p), recipes(rec), left(nullptr), right(nullptr) {}
     // functions
-    void addRecipe(Recipe* recipe) {
+    void addRecipe(Recipe recipe) {
         recipes.push_back(recipe);
     }
 
