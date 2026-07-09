@@ -109,28 +109,28 @@ class SplayTree {
     }
 
     // helper methods for other stuff: insert, remove, search
-    SplayTreeNode* insertHelper(SplayTreeNode* root, string ingredient, vector<Recipe*> recipes) {
+    SplayTreeNode* insertHelper(SplayTreeNode* root, string ingredient, Recipe recipe) {
         // this will return the inserted node
         if (root == nullptr) {
-            root = new SplayTreeNode(ingredient, nullptr, recipes);
+            root = new SplayTreeNode(ingredient, nullptr, {recipe});
             return root;
         }
         if (ingredient < root->key) {
             if (root->left == nullptr) {
-                root->left = new SplayTreeNode(ingredient, root,recipes);
+                root->left = new SplayTreeNode(ingredient, root, {recipe});
                 return root->left;
             }
-            return insertHelper(root->left, ingredient, recipes);
+            return insertHelper(root->left, ingredient, recipe);
         }
         else if (ingredient > root->key) {
             if (root->right == nullptr) {
-                root->right = new SplayTreeNode(ingredient, root, recipes);
+                root->right = new SplayTreeNode(ingredient, root, {recipe});
                 return root->right;
             }
-            return insertHelper(root->right, ingredient, recipes);
+            return insertHelper(root->right, ingredient, recipe);
         }
         else {
-            // for duplicate key, just return it
+            root->addRecipe(recipe);
             return root;
         }
     }
@@ -149,6 +149,21 @@ class SplayTree {
             return searchHelper(node->right, node, ingredient);
         }
     }
+
+    // SplayTreeNode* partialSearchHelper(SplayTreeNode* node, SplayTreeNode* prevNode, string ingredient, vector<SplayTreeNode*> result) {
+    //     if (node == nullptr) {
+    //         return prevNode;
+    //     }
+    //     if (node->key) {
+    //         return node;
+    //     }
+    //     else if (ingredient < node->key) {
+    //         return searchHelper(node->left, node, ingredient);
+    //     }
+    //     else {
+    //         return searchHelper(node->right, node, ingredient);
+    //     }
+    // }
 
     SplayTreeNode* removeHelper(SplayTreeNode* node, SplayTreeNode* prevNode, string ingredient) {
         if (node == nullptr) {
@@ -257,13 +272,17 @@ public:
     // functions
     // will implement insert, delete, find, etc...
 
-    SplayTreeNode* insert(string ingredient, vector<Recipe*> recipes) {
-        return splay(insertHelper(root, ingredient, recipes));
+    SplayTreeNode* insert(string ingredient, Recipe recipe) {
+        return splay(insertHelper(root, ingredient, recipe));
     }
 
     SplayTreeNode* search(string ingredient) {
         return splay(searchHelper(root, nullptr, ingredient));
     }
+
+    // SplayTreeNode* partialSearchString(string ingredient) {
+    //     return splay(partialSearchHelper())
+    // }
 
     SplayTreeNode* remove(string ingredient) {
         return splay(removeHelper(root, nullptr, ingredient));
