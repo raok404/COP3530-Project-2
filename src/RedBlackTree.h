@@ -9,36 +9,34 @@ using namespace std;
 class RedBlackTree {
     RedBlackTreeNode* root;
 
-    RedBlackTreeNode* insertHelper(RedBlackTreeNode* current, string ingredient, vector<Recipe> r) {
+    RedBlackTreeNode* insertHelper(RedBlackTreeNode* current, string ingredient, Recipe r) {
         if (current==nullptr) {
-            current=new RedBlackTreeNode(ingredient, nullptr, r);
+            current=new RedBlackTreeNode(ingredient, nullptr, {r});
             current->c=RedBlackTreeNode::Color::red;
             return current;
         }
         else if (ingredient<current->k) {
             if (current->left==nullptr) {
-                current->left=new RedBlackTreeNode(ingredient, current, r);
+                current->left=new RedBlackTreeNode(ingredient, current, {r});
                 current->left->c=RedBlackTreeNode::Color::red;
                 return current->left;
             }
             else {
-                return insertHelper(current->left, ingredient, r);
+                return insertHelper(current->left, ingredient, {r});
             }
         }
         else if (ingredient==current->k) {
-            for (int i=0; i<r.size(); i++) {
-                current->recipe.push_back(r[i]);
-            }
+            current->recipe.push_back(r);
             return current;
         }
         else {
             if (current->right==nullptr) {
-                current->right=new RedBlackTreeNode(ingredient, current, r);
+                current->right=new RedBlackTreeNode(ingredient, current, {r});
                 current->right->c=RedBlackTreeNode::Color::red;
                 return current->right;
             }
             else {
-                return insertHelper(current->right, ingredient, r);
+                return insertHelper(current->right, ingredient, {r});
             }
         }
     }
@@ -175,9 +173,9 @@ public:
         root=input;
     }
 
-    RedBlackTreeNode* insert(string ingredient, vector<Recipe> r) {
+    RedBlackTreeNode* insert(string ingredient, Recipe r) {
         if (root==nullptr) {
-            root=new RedBlackTreeNode(ingredient, nullptr, r);
+            root=new RedBlackTreeNode(ingredient, nullptr, {r});
             root->c=RedBlackTreeNode::Color::black;
             return root;
         }

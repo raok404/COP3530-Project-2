@@ -31,10 +31,6 @@ struct RecipeBook {
         ifstream jsonFile(filename);
         json allRecipes = json::parse(jsonFile);
 
-        auto it = allRecipes.begin();
-        std::cout << it.key() << std::endl;
-        std::cout << it.value() << std::endl;
-
         for (auto& [key, recipe] : allRecipes.items()) {
             try {
                 if (recipe.contains("title") && recipe.contains("norm_ingredients") && recipe.contains("instructions")) {
