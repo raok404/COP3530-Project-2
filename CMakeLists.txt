@@ -1,20 +1,46 @@
-cmake_minimum_required(VERSION 4.1)
-project(COP3530_Project_2)
+cmake_minimum_required(VERSION 3.16)
 
-set(CMAKE_CXX_STANDARD 14)
+project(ratatouile VERSION 0.1 LANGUAGES CXX)
 
-include_directories(src)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include(FetchContent)
+find_package(Qt6 REQUIRED COMPONENTS Quick)
 
-FetchContent_Declare(
-        json
-        GIT_REPOSITORY https://github.com/nlohmann/json.git
-        GIT_TAG v3.12.0
+qt_standard_project_setup(REQUIRES 6.10)
+
+# Content of downloaded design from Figma to Qt or similar
+if (EXISTS "${CMAKE_CURRENT_LIST_DIR}/importedcontent/CMakeLists.txt")
+    add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/importedcontent)
+endif()
+
+qt_add_executable(appratatouile
+    main.cpp
 )
 
-FetchContent_MakeAvailable(json)
+qt_add_qml_module(appratatouile
+    URI ratatouile
+    QML_FILES
+        Main.qml
+        SOURCES data.h data.cpp
+)
 
-add_executable(main src/main.cpp)
+# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
+# If you are developing for iOS or macOS you should consider setting an
+# explicit, fixed bundle identifier manually though.
+set_target_properties(appratatouile PROPERTIES
+#    MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appratatouile
+    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+    MACOSX_BUNDLE TRUE
+    WIN32_EXECUTABLE TRUE
+)
 
-target_link_libraries(main PRIVATE nlohmann_json::nlohmann_json)
+target_link_libraries(appratatouile
+    PRIVATE Qt6::Quick
+)
+
+install(TARGETS appratatouile
+    BUNDLE DESTINATION .
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
