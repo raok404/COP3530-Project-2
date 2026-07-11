@@ -611,91 +611,92 @@ Window {
                                 radius: 4
                             }
                             onClicked: {
+                                dataStructureManager.updateIngredientList(ingredientRegister.text)
                                 ingredientRegister.clear()
                             }
                         }
                     }
                 }
             }
-            GroupBox {
-                Layout.fillWidth: true
-                ColumnLayout {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    spacing: 10
-                    Text {
-                        text: "Register New Recipe"
+            // GroupBox {
+            //     Layout.fillWidth: true
+            //     ColumnLayout {
+            //         anchors.left: parent.left
+            //         anchors.right: parent.right
+            //         spacing: 10
+            //         Text {
+            //             text: "Register New Recipe"
 
-                    }
+            //         }
 
-                    RowLayout {
-                        Layout.fillWidth: true
-                        Text {
-                            text: "Recipe Name"
-                            font.bold: true
-                        }
-                        TextField {
-                            id: recipeNameRegister
-                            Layout.fillWidth: true
-                            placeholderText: qsTr("Name")
-                            font.pointSize: 8
-                            implicitHeight: 42
+            //         RowLayout {
+            //             Layout.fillWidth: true
+            //             Text {
+            //                 text: "Recipe Name"
+            //                 font.bold: true
+            //             }
+            //             TextField {
+            //                 id: recipeNameRegister
+            //                 Layout.fillWidth: true
+            //                 placeholderText: qsTr("Name")
+            //                 font.pointSize: 8
+            //                 implicitHeight: 42
 
-                        }
+            //             }
 
-                    }
-                    RowLayout {
-                        Layout.fillWidth: true
-                        Text {
-                            text: "Recipe Ingredients"
-                            font.bold: true
-                        }
-                        TextField {
-                            id: recipeIngredientRegister
-                            Layout.fillWidth: true
-                            placeholderText: qsTr("Ingredients")
-                            font.pointSize: 8
-                            implicitHeight: 42
-                        }
-                    }
-                    RowLayout {
-                        Layout.fillWidth: true
-                        Text {
-                            text: "Recipe Steps"
-                            font.bold: true
-                        }
-                        TextField {
-                            id: recipeStepsRegister
-                            Layout.fillWidth: true
-                            placeholderText: qsTr("Steps")
-                            font.pointSize: 8
-                            implicitHeight: 42
-                        }
-                    }
-                    Button {
-                        id: recipeRegisterButton
-                        text: "Register"
-                        font.bold: true
-                        contentItem: Text {
-                            text: recipeRegisterButton.text
-                            font: recipeRegisterButton.font
-                            color: recipeRegisterButton.down ? "#bababa" : "#383838"
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
-                        }
-                        background: Rectangle {
-                            color: recipeRegisterButton.down ? "#383838" : "#aaaaaa"
-                            radius: 4
-                        }
-                        Layout.alignment: Qt.AlignHCenter
-                        onClicked: {
-                            recipeNameRegister.clear()
-                            recipeIngredientRegister.clear()
-                            recipeStepsRegister.clear()
-                        }
-                    }
-                }
-            }
+            //         }
+            //         RowLayout {
+            //             Layout.fillWidth: true
+            //             Text {
+            //                 text: "Recipe Ingredients"
+            //                 font.bold: true
+            //             }
+            //             TextField {
+            //                 id: recipeIngredientRegister
+            //                 Layout.fillWidth: true
+            //                 placeholderText: qsTr("Ingredients")
+            //                 font.pointSize: 8
+            //                 implicitHeight: 42
+            //             }
+            //         }
+            //         RowLayout {
+            //             Layout.fillWidth: true
+            //             Text {
+            //                 text: "Recipe Steps"
+            //                 font.bold: true
+            //             }
+            //             TextField {
+            //                 id: recipeStepsRegister
+            //                 Layout.fillWidth: true
+            //                 placeholderText: qsTr("Steps")
+            //                 font.pointSize: 8
+            //                 implicitHeight: 42
+            //             }
+            //         }
+            //         Button {
+            //             id: recipeRegisterButton
+            //             text: "Register"
+            //             font.bold: true
+            //             contentItem: Text {
+            //                 text: recipeRegisterButton.text
+            //                 font: recipeRegisterButton.font
+            //                 color: recipeRegisterButton.down ? "#bababa" : "#383838"
+            //                 horizontalAlignment: Text.AlignHCenter
+            //                 verticalAlignment: Text.AlignVCenter
+            //             }
+            //             background: Rectangle {
+            //                 color: recipeRegisterButton.down ? "#383838" : "#aaaaaa"
+            //                 radius: 4
+            //             }
+            //             Layout.alignment: Qt.AlignHCenter
+            //             onClicked: {
+            //                 recipeNameRegister.clear()
+            //                 recipeIngredientRegister.clear()
+            //                 recipeStepsRegister.clear()
+            //             }
+            //         }
+            //     }
+            // }
 
         }
     }
