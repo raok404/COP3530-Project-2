@@ -4,6 +4,10 @@ project(ratatouile VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+
 find_package(Qt6 REQUIRED COMPONENTS Quick)
 
 qt_standard_project_setup(REQUIRES 6.10)
@@ -13,15 +17,34 @@ if (EXISTS "${CMAKE_CURRENT_LIST_DIR}/importedcontent/CMakeLists.txt")
     add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/importedcontent)
 endif()
 
+include_directories(src)
+
+include(FetchContent)
+
+FetchContent_Declare(
+        json
+        GIT_REPOSITORY https://github.com/nlohmann/json.git
+        GIT_TAG v3.12.0
+)
+
+FetchContent_MakeAvailable(json)
+
+
 qt_add_executable(appratatouile
-    main.cpp
+    src/main.cpp
+    src/Recipe.h
+    src/RedBlackTree.h
+    src/RedBlackTreeNode.h
+    src/SplayTree.h
+    src/TreeNode.h
 )
 
 qt_add_qml_module(appratatouile
     URI ratatouile
     QML_FILES
-        Main.qml
-        SOURCES data.h data.cpp
+        src/Main.qml
+        SOURCES src/data.h src/data.cpp
+        SOURCES
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -37,6 +60,7 @@ set_target_properties(appratatouile PROPERTIES
 
 target_link_libraries(appratatouile
     PRIVATE Qt6::Quick
+    PRIVATE nlohmann_json::nlohmann_json
 )
 
 install(TARGETS appratatouile
