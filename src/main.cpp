@@ -24,8 +24,18 @@ int main() {
     std::vector<std::string> ingredients = {
         "chicken", "chicken", "pork", "cabbage", "butter", "onion",
         "egg", "salt", "tomato", "pepper", "rice", "paper",
-        "sugar", "wheat", "ribeye steak", "truffle", "truffle", "pepperoni",
-        "meat", "coconut", "coconut water", "matcha", "coffee"
+        "sugar", "wheat", "ribeye steak", "truffle", "Truffle", "pepperoni",
+        "meat", "coconut", "coconut water", "matcha", "coffee", "garlic", "spinach",
+        "broccoli", "carrot", "potato", "zucchini", "cucumber", "asparagus", "mushroom",
+        "ginger", "cilantro", "basil", "rosemary", "celery", "Avocado", "salmon",
+        "shrimp", "tofu", "turkey", "duck", "lamb", "cod", "bacon", "cheddar cheese",
+        "heavy cream", "yogurt", "milk", "olive oil", "soy sauce", "all-purpose flour",
+        "honey", "vanilla extract", "baking powder", "yeast", "quinoa", "oats", "pasta",
+        "chickpeas", "black beans", "vinegar", "lemon", "lime", "apple", "Banana", "strawberry",
+        "blueberry", "almonds", "walnuts", "sesame seeds", "Chia seeds", "cinnamon", "nutmeg",
+        "paprika", "cumin", "thyme", "oregano", "Orange", "pineapple", "mango", "parsley",
+        "mint", "cauliflower", "eggplant", "sweet potato", "corn", "peas", "mayonnaise",
+        "dijon mustard", "maple syrup", "cocoa powder", "uo9eghfbpiqf"
     };
     timeSplay(book, ingredients);
     timeRedBlack(book, ingredients);
