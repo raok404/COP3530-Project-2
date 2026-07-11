@@ -277,7 +277,13 @@ public:
     }
 
     SplayTreeNode* search(string ingredient) {
-        return splay(searchHelper(root, nullptr, ingredient));
+        SplayTreeNode* temp = splay(searchHelper(root, nullptr, ingredient));
+        if (temp->key == ingredient) {
+            return temp;
+        }
+        else {
+            return nullptr;
+        }
     }
 
     // SplayTreeNode* partialSearchString(string ingredient) {

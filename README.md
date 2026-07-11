@@ -1,7 +1,7 @@
 # Ratatouille - COP3530 Project 2
 
 ## How to run the code
-### git lfs
+### Git lfs
 Due to the large size of the dataset, you will need git lfs to pull it from the GitHub.
 ```commandline
 git lfs install
@@ -10,11 +10,14 @@ git add .gitattributes
 
 git lfs pull
 ```
-### configuring CMakeLists.txt
+### Configuring CMakeLists.txt
 Use the CMakeLists.txt in the repo to make sure the dependencies (nlohmann/json) are installed
 
 ### running the program
+The frontend UI uses Qt. You can install it at this link: https://www.qt.io/development/download-qt-installer-oss
 
+Once you have downloaded Qt, open Qt Creator and open the CMakeLists.txt.
+Then, use the (Build) tab on the top to build and run the project.
 
 <H1> COP3530 - Project 2 </h1>
 This is the template for Project 2 repositories. It includes all the assignment instructions and documentation to help you use GitHub.
