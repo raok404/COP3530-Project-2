@@ -30,6 +30,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(json)
 
 
+
 qt_add_executable(appratatouile
     src/main.cpp
     src/Recipe.h
@@ -43,10 +44,14 @@ qt_add_qml_module(appratatouile
     URI ratatouile
     QML_FILES
         src/Main.qml
-        SOURCES src/data.h src/data.cpp
-        SOURCES
+    SOURCES
+        src/data.h
+        src/data.cpp
 )
 
+target_sources(appratatouile PRIVATE
+    "datasets/normalized_recipes.json"
+)
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
