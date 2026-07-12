@@ -8,10 +8,12 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <set>
 #include "SplayTree.h"
 #include "RedBlackTree.h"
 #include <nlohmann/json.hpp>
 
+// Struct configuration remains using Q_GADGET so QML can access fields directly
 struct recipeValue {
     Q_GADGET
     Q_PROPERTY(QString name MEMBER name)
@@ -35,7 +37,6 @@ public:
         isAvailable = true;
     }
 };
-
 Q_DECLARE_METATYPE(recipeValue)
 
 class data_structure : public QObject
@@ -53,9 +54,11 @@ public:
         try {
             RecipeBook book(jsonPath.toStdString());
             qInfo() << "Read in" << book.getNumRecipes() << "different recipes";
-
+            ingredientlist.push_back("cabbage");
+            ingredientlist.push_back("chicken");
+            ingredientlist.push_back("rice");
             for (const Recipe &recipe : book.recipes) {
-                for (string ingredient : recipe.ingredientList) {
+                for (const std::string &ingredient : recipe.ingredientList) {
                     s_tree.insert(ingredient, recipe);
                     rb_tree.insert(ingredient, recipe);
                 }
@@ -81,11 +84,13 @@ public slots:
     // Slot receives the key string from the QML button layer
     void processKeyTrigger(const QString &key);
     void updateIngredientList(const QString &ingredientName);
+    void initDatas();
 
 signals:
     // Signal sends the updated std::map downstream to QML
     void mapReady(const std::map<QString, recipeValue> &orderedMap);
     void textChanged();
+    void addIngredientToModel(const QString &ingredientName);
 
 private:
     std::map<QString, recipeValue> m_orderedMap;
@@ -97,4 +102,7 @@ private:
     RedBlackTree rb_tree;
     bool use_splay;
     string m_text = "Using Splay Tree";
+    std::set<recipeValue> uniqueRecipeList;
+    void signalIngredientChange();
+    void updateRecipeList();
 };
