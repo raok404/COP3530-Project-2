@@ -25,6 +25,12 @@ The frontend UI uses Qt. You can install it at this link: https://www.qt.io/deve
 Once you have downloaded Qt, open Qt Creator and open the CMakeLists.txt.
 Then, use the (Build) tab on the top to build and run the project.
 
+### files of interest
+- Main.qml (front end UI)
+- main.cpp, data.h/.cpp (ties backend and frontend together)
+- SplayTree.h, RedBlackTree.h (2 data structure to be compared for project 2)
+- test.cpp test file to time Insertion and searching
+
 <H1> COP3530 - Project 2 </h1>
 This is the template for Project 2 repositories. It includes all the assignment instructions and documentation to help you use GitHub.
 
