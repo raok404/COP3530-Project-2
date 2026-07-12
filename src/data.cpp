@@ -54,7 +54,7 @@ QVector<recipeValue> data_structure::search(QString key) {
         return output;
     }
 
-    RedBlackTreeNode* result = rb_tree.search("egg");
+    RedBlackTreeNode* result = rb_tree.search(key.toStdString());
     if (result == nullptr) {
         return output;
     }
