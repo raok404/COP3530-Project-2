@@ -1,5 +1,11 @@
 # Ratatouille - COP3530 Project 2
 
+# Problem
+- Cooking is a part of daily life. Sometimes, it can be challenging to know what to cook. In order to help users discover recipes that use foods they already have, we created Ratatouille.
+
+## Implementation
+- We created a red-black tree and splay tree. The trees use ingredients as keys (so you can search "rice" to find recipes that use rice). They store a list of all the recipes that use that ingredient.
+
 ## How to run the code
 ### Git lfs
 Due to the large size of the dataset, you will need git lfs to pull it from the GitHub.
