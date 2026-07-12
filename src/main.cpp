@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <data.h>
+#include <recipemodel.h>
 
 int main(int argc, char *argv[])
 {
@@ -11,6 +12,9 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("dataStructureManager", datas);
+    RecipeModel recipeModel(datas);
+    engine.rootContext()->setContextProperty("recipeModel", &recipeModel);
+
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreationFailed,

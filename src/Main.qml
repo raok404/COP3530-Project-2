@@ -62,6 +62,9 @@ Window {
 
                             onTextChanged: {
                                 console.log("Text Changed Data :", ingredientSearch.text)
+                                // INGREDIENT SEARCH FUNCTIONALITY
+                                recipeModel.search(text)
+
                             }
                         }
                     }
@@ -386,6 +389,7 @@ Window {
 
                             onTextChanged: {
                                 console.log("Text Changed Data :", recipeSearch.text)
+
                             }
                         }
                     }
@@ -424,54 +428,19 @@ Window {
         }
     }
 
-    ListModel {
-        id: recipeModel
-        ListElement {
-            name: "Chicken sandwich"
-        }
-        ListElement {
-            name: "Noodle"
-        }
-        ListElement {
-            name: "Spaghetti"
-        }
-        ListElement {
-            name: "fried rice"
-        }
-        ListElement {
-            name: "dumplings"
-        }
-        ListElement {
-            name: "salad"
-        }
-        ListElement {
-            name: "steak"
-        }
-        ListElement {
-            name: "salmon steak"
-        }
-        ListElement {
-            name: "ice cream"
-        }
-        ListElement {
-            name: "baked potatoes"
-        }
-        ListElement {
-            name: "bread"
-        }
-        ListElement {
-            name: "pho"
-        }
-        ListElement {
-            name: "omelette"
-        }
-        ListElement {
-            name: "canned tuna"
-        }
-        ListElement {
-            name: "placeholder"
-        }
+    ListView {
+        anchors.fill: parent
 
+        model: recipeModel
+
+        delegate: Rectangle {
+            height: 50
+            width: parent.width
+
+            Text {
+                text: name
+            }
+        }
     }
 
     ListModel {

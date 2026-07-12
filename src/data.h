@@ -12,7 +12,6 @@
 #include "RedBlackTree.h"
 #include <nlohmann/json.hpp>
 
-// Struct configuration remains using Q_GADGET so QML can access fields directly
 struct recipeValue {
     Q_GADGET
     Q_PROPERTY(QString name MEMBER name)
@@ -25,7 +24,18 @@ public:
     QString ingredients;
     QString instructions;
     bool isAvailable;
+
+    recipeValue(string n, vector<string> ings, string ins) {
+        name = QString::fromStdString(n);
+        instructions = QString::fromStdString(ins);
+        for (auto& str : ings) {
+            ingredients.append(QString::fromStdString(str));
+            ingredients.append(QString::fromStdString(", "));
+        }
+        isAvailable = true;
+    }
 };
+
 Q_DECLARE_METATYPE(recipeValue)
 
 class data_structure : public QObject
@@ -39,14 +49,23 @@ public:
         QString jsonPath = QCoreApplication::applicationDirPath() + "/datasets/normalized_recipes.json";
 
         try {
-            RecipeBook book(jsonPath.toStdString(), 10000);
+            RecipeBook book(jsonPath.toStdString());
             qInfo() << "Read in" << book.getNumRecipes() << "different recipes";
+
+            for (const Recipe &recipe : book.recipes) {
+                for (string ingredient : recipe.ingredientList) {
+                    s_tree.insert(ingredient, recipe);
+                }
+            }
+            qInfo() << "Finished adding to tree";
         }
         catch (const std::exception &e) {
             qCritical() << "CRITICAL RUNTIME ERROR:" << e.what();
             qCritical() << "Attempted path was:" << jsonPath;
         }
     }
+
+    QVector<recipeValue> search(QString query);
 
 public slots:
     // Slot receives the key string from the QML button layer
@@ -62,4 +81,6 @@ private:
     std::vector<recipeValue> recipelist;
     std::vector<recipeValue> shownrecipelist;
     std::vector<std::string> ingredientlist;
+
+    SplayTree s_tree;
 };

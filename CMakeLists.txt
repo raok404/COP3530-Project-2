@@ -45,6 +45,14 @@ qt_add_qml_module(appratatouile
         src/Main.qml
         SOURCES src/data.h src/data.cpp
         SOURCES
+        SOURCES src/recipemodel.h
+        SOURCES src/recipemodel.cpp
+)
+
+configure_file(
+    ${CMAKE_SOURCE_DIR}/datasets/normalized_recipes.json
+    ${CMAKE_BINARY_DIR}/datasets/normalized_recipes.json
+    COPYONLY
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
