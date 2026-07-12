@@ -60,11 +60,10 @@ Window {
                             font.pointSize: 8
                             implicitHeight: 30
 
-                            onTextChanged: {
+                            onAccepted: {
                                 console.log("Text Changed Data :", ingredientSearch.text)
                                 // INGREDIENT SEARCH FUNCTIONALITY
                                 recipeModel.search(text)
-
                             }
                         }
                     }
@@ -74,6 +73,15 @@ Window {
             ColumnLayout {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+                Button {
+                        z: 100
+                        text: dataStructureManager.text
+
+                        onClicked: {
+                            console.log("QC Check Started!")
+                            dataStructureManager.switchTree()
+                        }
+                    }
                 ListView {
                     id: ingredientsView
                     Layout.fillWidth: true
@@ -253,6 +261,7 @@ Window {
                             }
                             Item {
                                 Layout.fillHeight: true
+                                Layout.fillWidth: true
                             }
                         }
                     }

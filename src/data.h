@@ -42,6 +42,8 @@ class data_structure : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY(QString text READ text NOTIFY textChanged)
+
 public:
     explicit data_structure(QObject *parent = nullptr) : QObject(parent) {
         qInfo() << "initing...";
@@ -55,6 +57,7 @@ public:
             for (const Recipe &recipe : book.recipes) {
                 for (string ingredient : recipe.ingredientList) {
                     s_tree.insert(ingredient, recipe);
+                    rb_tree.insert(ingredient, recipe);
                 }
             }
             qInfo() << "Finished adding to tree";
@@ -63,9 +66,16 @@ public:
             qCritical() << "CRITICAL RUNTIME ERROR:" << e.what();
             qCritical() << "Attempted path was:" << jsonPath;
         }
+
+        use_splay = true;
     }
 
+    QString text() const { return QString::fromStdString(m_text); }
+
+
     QVector<recipeValue> search(QString query);
+
+    Q_INVOKABLE void switchTree();
 
 public slots:
     // Slot receives the key string from the QML button layer
@@ -75,6 +85,7 @@ public slots:
 signals:
     // Signal sends the updated std::map downstream to QML
     void mapReady(const std::map<QString, recipeValue> &orderedMap);
+    void textChanged();
 
 private:
     std::map<QString, recipeValue> m_orderedMap;
@@ -83,4 +94,7 @@ private:
     std::vector<std::string> ingredientlist;
 
     SplayTree s_tree;
+    RedBlackTree rb_tree;
+    bool use_splay;
+    string m_text = "Using Splay Tree";
 };
