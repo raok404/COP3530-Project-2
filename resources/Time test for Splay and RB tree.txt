@@ -1,0 +1,199 @@
+Time test for Splay and RB tree. 122K recipe samples.
+
+
+// Splay Tree below
+Read in 122953 different recipes
+Init time for split 22912 ms
+Search time for chicken 9 us. Recipe size 2628
+Search time for chicken 0 us. Recipe size 2628
+Search time for pork 6 us. Recipe size 1202
+Search time for cabbage 7 us. Recipe size 558
+Search time for butter 1 us. Recipe size 20849
+Search time for onion 5 us. Recipe size 15213
+Search time for egg 13 us. Recipe size 7451
+Search time for salt 5 us. Recipe size 32506
+Search time for tomato 8 us. Recipe size 1445
+Search time for pepper 8 us. Recipe size 2829
+Search time for rice 18 us. Recipe size 334
+Search time for paper 20 us. Recipe size 6
+Search time for sugar 4 us. Recipe size 20345
+Search time for wheat 11 us. Recipe size 39
+Search time for ribeye steak 11 us. Recipe size 0
+Search time for truffle 8 us. Recipe size 6
+Search time for Truffle 21 us. Recipe size 0
+Search time for pepperoni 15 us. Recipe size 182
+Search time for meat 11 us. Recipe size 18
+Search time for coconut 11 us. Recipe size 1018
+Search time for coconut water 12 us. Recipe size 76
+Search time for matcha 11 us. Recipe size 13
+Search time for coffee 10 us. Recipe size 66
+Search time for garlic 14 us. Recipe size 6484
+Search time for spinach 8 us. Recipe size 942
+Search time for broccoli 13 us. Recipe size 1057
+Search time for carrot 7 us. Recipe size 2355
+Search time for potato 9 us. Recipe size 275
+Search time for zucchini 4 us. Recipe size 1553
+Search time for cucumber 6 us. Recipe size 950
+Search time for asparagus 6 us. Recipe size 776
+Search time for mushroom 8 us. Recipe size 21
+Search time for ginger 2 us. Recipe size 6725
+Search time for cilantro 4 us. Recipe size 4568
+Search time for basil 3 us. Recipe size 1845
+Search time for rosemary 6 us. Recipe size 2149
+Search time for celery 4 us. Recipe size 5612
+Search time for Avocado 2 us. Recipe size 0
+Search time for salmon 7 us. Recipe size 485
+Search time for shrimp 4 us. Recipe size 1335
+Search time for tofu 4 us. Recipe size 241
+Search time for turkey 10 us. Recipe size 943
+Search time for duck 14 us. Recipe size 118
+Search time for lamb 10 us. Recipe size 306
+Search time for cod 9 us. Recipe size 132
+Search time for bacon 9 us. Recipe size 2697
+Search time for cheddar cheese 3 us. Recipe size 2049
+Search time for heavy cream 17 us. Recipe size 0
+Search time for yogurt 13 us. Recipe size 124
+Search time for milk 8 us. Recipe size 12780
+Search time for olive oil 15 us. Recipe size 21195
+Search time for soy sauce 8 us. Recipe size 4306
+Search time for all-purpose flour 64 us. Recipe size 0
+Search time for honey 7 us. Recipe size 5931
+Search time for vanilla extract 16 us. Recipe size 10693
+Search time for baking powder 5 us. Recipe size 7886
+Search time for yeast 8 us. Recipe size 147
+Search time for quinoa 25 us. Recipe size 380
+Search time for oats 9 us. Recipe size 115
+Search time for pasta 19 us. Recipe size 112
+Search time for chickpeas 12 us. Recipe size 355
+Search time for black beans 4 us. Recipe size 843
+Search time for vinegar 13 us. Recipe size 421
+Search time for lemon 5 us. Recipe size 3730
+Search time for lime 3 us. Recipe size 1517
+Search time for apple 8 us. Recipe size 486
+Search time for Banana 2 us. Recipe size 0
+Search time for strawberry 6 us. Recipe size 30
+Search time for blueberry 14 us. Recipe size 3
+Search time for almonds 4 us. Recipe size 2744
+Search time for walnuts 4 us. Recipe size 2982
+Search time for sesame seeds 18 us. Recipe size 1106
+Search time for Chia seeds 4 us. Recipe size 0
+Search time for cinnamon 17 us. Recipe size 10730
+Search time for nutmeg 8 us. Recipe size 4729
+Search time for paprika 4 us. Recipe size 3023
+Search time for cumin 5 us. Recipe size 5134
+Search time for thyme 5 us. Recipe size 4066
+Search time for oregano 14 us. Recipe size 1086
+Search time for Orange 5 us. Recipe size 0
+Search time for pineapple 13 us. Recipe size 955
+Search time for mango 15 us. Recipe size 544
+Search time for parsley 3 us. Recipe size 5179
+Search time for mint 53 us. Recipe size 1348
+Search time for cauliflower 16 us. Recipe size 608
+Search time for eggplant 12 us. Recipe size 454
+Search time for sweet potato 31 us. Recipe size 245
+Search time for corn 13 us. Recipe size 623
+Search time for peas 13 us. Recipe size 806
+Search time for mayonnaise 6 us. Recipe size 4516
+Search time for dijon mustard 6 us. Recipe size 3942
+Search time for maple syrup 4 us. Recipe size 931
+Search time for cocoa powder 7 us. Recipe size 647
+Search time for uo9eghfbpiqf 22 us. Recipe size 0
+Total search time 974 us
+
+// RB tree below
+Init time 23768 ms
+Search time for chicken 2 us. Recipe size 2628
+Search time for chicken 3 us. Recipe size 2628
+Search time for pork 6 us. Recipe size 1202
+Search time for cabbage 8 us. Recipe size 558
+Search time for butter 2 us. Recipe size 20849
+Search time for onion 2 us. Recipe size 15213
+Search time for egg 2 us. Recipe size 7451
+Search time for salt 2 us. Recipe size 32506
+Search time for tomato 3 us. Recipe size 1445
+Search time for pepper 2 us. Recipe size 2829
+Search time for rice 4 us. Recipe size 334
+Search time for paper 5 us. Recipe size 6
+Search time for sugar 1 us. Recipe size 20345
+Search time for wheat 4 us. Recipe size 39
+Search time for ribeye steak 4 us. Recipe size 0
+Search time for truffle 5 us. Recipe size 6
+Search time for Truffle 2 us. Recipe size 0
+Search time for pepperoni 2 us. Recipe size 182
+Search time for meat 4 us. Recipe size 18
+Search time for coconut 5 us. Recipe size 1018
+Search time for coconut water 5 us. Recipe size 76
+Search time for matcha 6 us. Recipe size 13
+Search time for coffee 4 us. Recipe size 66
+Search time for garlic 1 us. Recipe size 6484
+Search time for spinach 2 us. Recipe size 942
+Search time for broccoli 1 us. Recipe size 1057
+Search time for carrot 3 us. Recipe size 2355
+Search time for potato 5 us. Recipe size 275
+Search time for zucchini 10 us. Recipe size 1553
+Search time for cucumber 4 us. Recipe size 950
+Search time for asparagus 6 us. Recipe size 776
+Search time for mushroom 7 us. Recipe size 21
+Search time for ginger 2 us. Recipe size 6725
+Search time for cilantro 4 us. Recipe size 4568
+Search time for basil 0 us. Recipe size 1845
+Search time for rosemary 2 us. Recipe size 2149
+Search time for celery 1 us. Recipe size 5612
+Search time for Avocado 3 us. Recipe size 0
+Search time for salmon 5 us. Recipe size 485
+Search time for shrimp 3 us. Recipe size 1335
+Search time for tofu 4 us. Recipe size 241
+Search time for turkey 5 us. Recipe size 943
+Search time for duck 4 us. Recipe size 118
+Search time for lamb 3 us. Recipe size 306
+Search time for cod 3 us. Recipe size 132
+Search time for bacon 2 us. Recipe size 2697
+Search time for cheddar cheese 2 us. Recipe size 2049
+Search time for heavy cream 17 us. Recipe size 0
+Search time for yogurt 6 us. Recipe size 124
+Search time for milk 2 us. Recipe size 12780
+Search time for olive oil 0 us. Recipe size 21195
+Search time for soy sauce 2 us. Recipe size 4306
+Search time for all-purpose flour 8 us. Recipe size 0
+Search time for honey 3 us. Recipe size 5931
+Search time for vanilla extract 2 us. Recipe size 10693
+Search time for baking powder 3 us. Recipe size 7886
+Search time for yeast 2 us. Recipe size 147
+Search time for quinoa 1 us. Recipe size 380
+Search time for oats 6 us. Recipe size 115
+Search time for pasta 2 us. Recipe size 112
+Search time for chickpeas 2 us. Recipe size 355
+Search time for black beans 0 us. Recipe size 843
+Search time for vinegar 4 us. Recipe size 421
+Search time for lemon 1 us. Recipe size 3730
+Search time for lime 3 us. Recipe size 1517
+Search time for apple 2 us. Recipe size 486
+Search time for Banana 2 us. Recipe size 0
+Search time for strawberry 5 us. Recipe size 30
+Search time for blueberry 3 us. Recipe size 3
+Search time for almonds 2 us. Recipe size 2744
+Search time for walnuts 1 us. Recipe size 2982
+Search time for sesame seeds 5 us. Recipe size 1106
+Search time for Chia seeds 2 us. Recipe size 0
+Search time for cinnamon 8 us. Recipe size 10730
+Search time for nutmeg 5 us. Recipe size 4729
+Search time for paprika 5 us. Recipe size 3023
+Search time for cumin 3 us. Recipe size 5134
+Search time for thyme 7 us. Recipe size 4066
+Search time for oregano 7 us. Recipe size 1086
+Search time for Orange 3 us. Recipe size 0
+Search time for pineapple 7 us. Recipe size 955
+Search time for mango 4 us. Recipe size 544
+Search time for parsley 6 us. Recipe size 5179
+Search time for mint 2 us. Recipe size 1348
+Search time for cauliflower 3 us. Recipe size 608
+Search time for eggplant 2 us. Recipe size 454
+Search time for sweet potato 6 us. Recipe size 245
+Search time for corn 7 us. Recipe size 623
+Search time for peas 7 us. Recipe size 806
+Search time for mayonnaise 2 us. Recipe size 4516
+Search time for dijon mustard 2 us. Recipe size 3942
+Search time for maple syrup 9 us. Recipe size 931
+Search time for cocoa powder 3 us. Recipe size 647
+Search time for uo9eghfbpiqf 7 us. Recipe size 0
+Total search time 356 us
