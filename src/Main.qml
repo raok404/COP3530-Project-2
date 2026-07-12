@@ -428,20 +428,6 @@ Window {
         }
     }
 
-    ListView {
-        anchors.fill: parent
-
-        model: recipeModel
-
-        delegate: Rectangle {
-            height: 50
-            width: parent.width
-
-            Text {
-                text: name
-            }
-        }
-    }
 
     ListModel {
         id: ingredientModel
@@ -466,6 +452,8 @@ Window {
         Item {
             id: myItem
             required property string name
+            required property string ingredients
+            required property string instructions
             height: 40
             width: ListView.view.width - 16
 
@@ -500,8 +488,8 @@ Window {
                         bookmark.append({
                             "title" : myItem.name,
                             "pageColor" : "#f0f0f0",
-                            "ingredients" : "- skinless boneless chicken halves\n- butter\n- condensed cream chicken soup\n- onion\n- biscuit dough torn",
-                            "instructions": "Place the chicken, butter, soup, and onion in a slow cooker, and fill with enough water to cover.\nCover, and cook for 5 to 6 hours on High. About 30 minutes before serving, place the torn biscuit dough in the slow cooker. Cook until the dough is no longer raw in the center.\n"
+                            "ingredients" : myItem.ingredients,
+                            "instructions": myItem.instructions
                         });
                     } else if (myItem.ListView.view.viewType === "ingredients") {
                         // nothing happens for now since our data doesn't have contents for the ingredients
