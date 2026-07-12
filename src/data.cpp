@@ -2,6 +2,36 @@
 #include <QDebug>
 
 
+void data_structure::updateIngredientList(const QString &ingredientName) {
+    std::string str = ingredientName.toStdString();
+    qInfo() << str << " added";
+    ingredientlist.push_back(str);
+
+    signalIngredientChange();
+}
+
+void data_structure::signalIngredientChange() {
+    for (const std::string &name: ingredientlist) {
+        qInfo() << "adding to ing" << name;
+        QString QSname = QString::fromStdString(name);
+        emit addIngredientToModel(QSname);
+    }
+}
+
+void data_structure::updateRecipeList(){
+    for (const std::string &name: ingredientlist) {
+        SplayTreeNode* test = s_tree.search(name);
+        vector<Recipe> temp = test->recipes;
+        for (const Recipe &recip : temp) {
+
+        }
+    }
+}
+
+void data_structure::initDatas() {
+    signalIngredientChange();
+}
+
 void data_structure::processKeyTrigger(const QString &key)
 {
     // Push the updated map configuration back up to the interface layer
@@ -16,16 +46,10 @@ QVector<recipeValue> data_structure::search(QString key) {
     }
     else {
         for (Recipe& r : result->recipes) {
-           output.push_back(recipeValue(r.recipeName, r.ingredientList, r.instructions));
+            output.push_back(recipeValue(r.recipeName, r.ingredientList, r.instructions));
         }
     }
 
     return output;
 }
 
-void data_structure::updateIngredientList(const QString &ingredientName) {
-    std::string str = ingredientName.toStdString();
-    qInfo() << str;
-    //ingredientlist.push_back(str);
-    qInfo() << "test test test";
-}

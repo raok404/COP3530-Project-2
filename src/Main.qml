@@ -62,9 +62,7 @@ Window {
 
                             onTextChanged: {
                                 console.log("Text Changed Data :", ingredientSearch.text)
-                                // INGREDIENT SEARCH FUNCTIONALITY
                                 recipeModel.search(text)
-
                             }
                         }
                     }
@@ -126,11 +124,19 @@ Window {
                     model: bookmark
                     TabButton {
                         //anchors.fill: parent
-                        width: implicitWidth + 84
+                        width: 102
                         Label {
                             id: tabLabel
                             text: model.title
                             anchors.centerIn: parent
+                            elide: Text.ElideRight
+                            anchors.fill: parent
+                            anchors.right: closingbutton.left
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.rightMargin: closingbutton.width
+                            anchors.leftMargin: 6
+                            verticalAlignment: Text.AlignVCenter
+                            //horizontalAlignment: Text.AlignHCenter
                         }
                         AbstractButton {
                             id: closingbutton
@@ -199,62 +205,71 @@ Window {
                     // This is the template for our pages
                     Rectangle {
                         color: model.pageColor
-
-                        ColumnLayout {
+                        ScrollView {
+                            id: view
                             anchors.fill: parent
-                            anchors.leftMargin: 6
-                            anchors.rightMargin: 6
-                            spacing: 2
+                            ScrollBar.vertical.policy: ScrollBar.AlwaysOn
+                            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+                            contentWidth: availableWidth
+                            ColumnLayout {
+                                anchors.fill: parent
+                                anchors.leftMargin: 6
+                                anchors.rightMargin: 6
+                                spacing: 2
+                                implicitWidth: view.availableWidth
 
-                            Text {
-                                text: model.title
-                                font.bold: true
-                                font.underline: true
-                                font.pointSize: 24
-                                lineHeight: 1.5
-                                lineHeightMode: Text.ProportionalHeight
-                                wrapMode: Text.Wrap
-                                //layout.horizontalCenter: parent
-                            }
+                                Text {
+                                    text: model.title
+                                    font.bold: true
+                                    Layout.fillWidth: true
+                                    font.underline: true
+                                    font.pointSize: 24
+                                    lineHeight: 1.5
+                                    lineHeightMode: Text.ProportionalHeight
+                                    wrapMode: Text.Wrap
+                                    //layout.horizontalCenter: parent
+                                }
 
-                            Text {
-                                text: "Ingredients: "
-                                font.bold: true
-                                font.pixelSize: 18
-                                lineHeight: 1.5
-                                lineHeightMode: Text.ProportionalHeight
-                                wrapMode: Text.Wrap
-                            }
+                                Text {
+                                    text: "Ingredients: "
+                                    font.bold: true
+                                    font.pixelSize: 18
+                                    lineHeight: 1.5
+                                    lineHeightMode: Text.ProportionalHeight
+                                    wrapMode: Text.Wrap
+                                }
 
-                            Text {
-                                leftPadding: 10
-                                text: model.ingredients
-                                font.pixelSize: 14
-                                lineHeight: 1.5
-                                lineHeightMode: Text.ProportionalHeight
-                                wrapMode: Text.Wrap
-                            }
-                            Text {
-                                text: "Instructions: "
-                                font.bold: true
-                                font.pixelSize: 18
-                                lineHeight: 1.5
-                                lineHeightMode: Text.ProportionalHeight
-                                wrapMode: Text.Wrap
-                            }
-                            Text {
-                                Layout.fillWidth: true
-                                text: model.instructions
-                                //anchors.horizontalCenter: parent
-                                font.pixelSize: 16
-                                lineHeight: 1.5
-                                lineHeightMode: Text.ProportionalHeight
-                                wrapMode: Text.Wrap
-                            }
-                            Item {
-                                Layout.fillHeight: true
+                                Text {
+                                    Layout.fillWidth: true
+                                    text: model.ingredients
+                                    font.pixelSize: 14
+                                    lineHeight: 1.5
+                                    lineHeightMode: Text.ProportionalHeight
+                                    wrapMode: Text.Wrap
+                                }
+                                Text {
+                                    text: "Instructions: "
+                                    font.bold: true
+                                    font.pixelSize: 18
+                                    lineHeight: 1.5
+                                    lineHeightMode: Text.ProportionalHeight
+                                    wrapMode: Text.Wrap
+                                }
+                                Text {
+                                    Layout.fillWidth: true
+                                    text: model.instructions
+                                    //anchors.horizontalCenter: parent
+                                    font.pixelSize: 16
+                                    lineHeight: 1.5
+                                    lineHeightMode: Text.ProportionalHeight
+                                    wrapMode: Text.Wrap
+                                }
+                                Item {
+                                    Layout.fillHeight: true
+                                }
                             }
                         }
+
                     }
                 }
 
@@ -389,7 +404,6 @@ Window {
 
                             onTextChanged: {
                                 console.log("Text Changed Data :", recipeSearch.text)
-
                             }
                         }
                     }
@@ -428,23 +442,27 @@ Window {
         }
     }
 
+    ListView {
+        anchors.fill: parent
+
+        model: recipeModel
+    }
 
     ListModel {
         id: ingredientModel
-        ListElement {
-            name: "cabbage"
-        }
-        ListElement {
-            name: "rice"
-        }
-        ListElement {
-            name: "flour"
-        }
-
     }
 
     ListModel {
         id: bookmark
+    }
+
+    Connections {
+        target: dataStructureManager
+
+        function onAddIngredientToModel(ingredientSigName) {
+            ingredientModel.append({ name : ingredientSigName, ingredients : "", instructions : ""});
+            console.log(ingredientSigName);
+        }
     }
 
     Component {
@@ -568,6 +586,7 @@ Window {
                                 radius: 4
                             }
                             onClicked: {
+                                ingredientModel.clear();
                                 dataStructureManager.updateIngredientList(ingredientRegister.text)
                                 ingredientRegister.clear()
                             }
@@ -743,5 +762,9 @@ Window {
                 Loader { anchors.fill: parent; sourceComponent: viewThree}
             }
         }
+    }
+
+    Component.onCompleted: {
+        dataStructureManager.initDatas();
     }
 }
